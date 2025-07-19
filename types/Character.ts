@@ -1,7 +1,13 @@
+export enum Status {
+    ALIVE = 'Alive',
+    DEAD = 'Dead',
+    UNKNOWN = 'unknown'
+}
+
 export interface Character {
     id: number;
     name: string;
-    status: "Alive" | "Dead" | "unknown";
+    status: Status;
     species: string;
     type: string;
     gender: "Female" | "Male" | "Genderless" | "unknown";

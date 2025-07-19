@@ -1,5 +1,7 @@
 'use client'
 
+import Characters from "@/components/custom/Characters";
+import CharactersGrid from "@/components/custom/CharactersGrid";
 import { useFetchCharacters } from "@/hooks/useFetchCharacters";
 import { useFetchEpisodes } from "@/hooks/useFetchEpisodes";
 import { Character } from "@/types/Character";
@@ -32,7 +34,14 @@ export default function Home() {
 
   return (
     <div>
-      <p className='text-black text-center p-5'>Rick and Morty App</p>
+      <p className='text-black text-center p-2'>Rick and Morty App</p>
+
+      <div className="p-5">
+        {
+          !loading && !loadingEposides &&
+          <Characters charactersPage1={charactersPage1} charactersPage2={charactersPage2} />
+        }
+      </div>
     </div>
   );
 }

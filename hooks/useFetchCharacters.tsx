@@ -5,10 +5,9 @@ export function useFetchCharacters() {
     const API_URL = process.env.NEXT_PUBLIC_RICK_AND_MORTY_API
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
-    const [characters, setCharacters] = useState<Array<Character>>([])
     const [character, setCharacter] = useState<Character>()
 
-    const getCharacters = async (page: number) : Promise<Character[]> => {
+    const getCharacters = async (page: number) : Promise<Character[] | undefined> => {
         try {
             setLoading(true)
             const response = await fetch(`${API_URL}/character?page=${page}`, {
@@ -17,16 +16,14 @@ export function useFetchCharacters() {
 
             if (!response.ok) throw new Error()
 
-            const result = await response.json()
+            const {results} = await response.json()
 
-            setCharacters(result.result)
+            return results
         } catch (err: any) {
             setError(err)
         } finally {
             setLoading(false)
         }
-
-        return characters
     }
 
     const getCharacterById = async (id: number) => {
