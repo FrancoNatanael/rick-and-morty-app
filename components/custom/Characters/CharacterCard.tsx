@@ -1,6 +1,6 @@
 import { Character } from "@/types/Character";
-import { Card, CardContent } from "../ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Card, CardContent } from "../../ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 
 interface CharacterCardProps {
     character: Character

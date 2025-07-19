@@ -1,7 +1,8 @@
 'use client'
 
-import Characters from "@/components/custom/Characters";
-import CharactersGrid from "@/components/custom/CharactersGrid";
+import Characters from "@/components/custom/Characters/Characters";
+import CharactersGrid from "@/components/custom/Characters/CharactersGrid";
+import Episodes from "@/components/custom/Episodes/Episodes";
 import { useFetchCharacters } from "@/hooks/useFetchCharacters";
 import { useFetchEpisodes } from "@/hooks/useFetchEpisodes";
 import { Character } from "@/types/Character";
@@ -10,15 +11,10 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const { loading, getCharacters } = useFetchCharacters()
-  const { loading: loadingEposides, getEpisodes } = useFetchEpisodes()
   const [charactersPage1, setCharactersPage1] = useState<Array<Character>>([])
   const [charactersPage2, setCharactersPage2] = useState<Array<Character>>([])
-  const [selectedCharacters, setSelectedCharacters] = useState<Array<Character>>([])
-
-  const getEpisodesBySelectedCharacters = async () => {
-    const epidosesToShow = selectedCharacters.map((character: Character) => character.episode).flat()
-    const episodesResponse = await getEpisodes([1,2,3])
-  }
+  const [selectedCharactersPage1, setSelectedCharactersPage1] = useState<Array<Character>>([])
+  const [selectedCharactersPage2, setSelectedCharactersPage2] = useState<Array<Character>>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,9 +34,16 @@ export default function Home() {
 
       <div className="p-5">
         {
-          !loading && !loadingEposides &&
-          <Characters charactersPage1={charactersPage1} charactersPage2={charactersPage2} />
+          !loading &&
+          <Characters 
+          charactersPage1={charactersPage1} 
+          charactersPage2={charactersPage2}
+          setSelectedCharactersPage1={setSelectedCharactersPage1}
+          setSelectedCharactersPage2={setSelectedCharactersPage2} />
         }
+      </div>
+      <div className="px-5">
+        <Episodes selectedCharactersPage1={selectedCharactersPage1} selectedCharactersPage2={selectedCharactersPage2}/>
       </div>
     </div>
   );

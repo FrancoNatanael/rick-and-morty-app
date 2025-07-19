@@ -5,27 +5,24 @@ export function useFetchEpisodes() {
     const API_URL = process.env.NEXT_PUBLIC_RICK_AND_MORTY_API
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
-    const [episodes, setEpisodes] = useState<Array<Episode>>([])
 
-    const getEpisodes = async (episodesNumbers: Array<number>) => {
+    const getEpisodes = async (episodesNumbers: Array<number>) : Promise<Array<Episode> | undefined> => {
         try {
             setLoading(true)
             const response = await fetch(`${API_URL}/episode/${episodesNumbers}`, {
                 method: 'GET',
             })
 
-            if (!response.ok) return false
+            if (!response.ok) throw new Error()
 
-            const result = await response.json()
+            const {results} = await response.json()
 
-            setEpisodes(result)
+            return results
         } catch (err: any) {
             setError(err)
         } finally {
             setLoading(false)
         }
-        
-        return episodes
     }
 
     return {
