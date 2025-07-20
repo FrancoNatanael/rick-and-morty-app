@@ -29,21 +29,32 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
-      <p className='text-black text-center p-2'>Rick and Morty App</p>
+    <div className="h-full md:h-screen w-full bg-[url('/bg.jpg')] bg-contain bg-center">
+      <Image 
+        src="/rick-and-morty.png" 
+        alt="Logo" 
+        width={130} 
+        height={130}
+        className="mx-auto"
+      />
 
-      <div className="p-5">
+      <div className="px-5 mb-2">
         {
           !loading &&
           <Characters 
           charactersPage1={charactersPage1} 
           charactersPage2={charactersPage2}
           setSelectedCharactersPage1={setSelectedCharactersPage1}
-          setSelectedCharactersPage2={setSelectedCharactersPage2} />
+          setSelectedCharactersPage2={setSelectedCharactersPage2}
+          selectedCharactersPage1={selectedCharactersPage1}
+          selectedCharactersPage2={selectedCharactersPage2}
+          />
         }
       </div>
       <div className="px-5">
-        <Episodes selectedCharactersPage1={selectedCharactersPage1} selectedCharactersPage2={selectedCharactersPage2}/>
+        <Episodes 
+        selectedCharactersPage1={selectedCharactersPage1} 
+        selectedCharactersPage2={selectedCharactersPage2}/>
       </div>
     </div>
   );

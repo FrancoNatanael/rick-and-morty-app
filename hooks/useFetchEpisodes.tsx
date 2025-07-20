@@ -15,7 +15,7 @@ export function useFetchEpisodes() {
 
             if (!response.ok) throw new Error()
 
-            const {results} = await response.json()
+            const results = await response.json()
 
             return results
         } catch (err: any) {
