@@ -34,4 +34,4 @@ El proyecto consiste en una aplicación web que permite visualizar personajes de
    - npm run test
 
 ## 🌐 Despliegue realizado en Vercel
-- https://rick-and-morty-app-bci7-hn3ldxxl5-francos-projects-134e6b0f.vercel.app/
+- https://rick-and-morty-app-bci7.vercel.app/
