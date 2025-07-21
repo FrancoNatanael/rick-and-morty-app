@@ -35,7 +35,7 @@ export default function Episodes({ selectedCharactersPage1, selectedCharactersPa
         selectedCharacters={selectedCharactersPage1}/>
 
         <EpisodesInfoCard 
-        title="Characters #1 & #2 - Shred Episodes"
+        title="Characters #1 & #2 - Shared Episodes"
         selectedCharacters={sharedCharacters}/>
 
         <EpisodesInfoCard 

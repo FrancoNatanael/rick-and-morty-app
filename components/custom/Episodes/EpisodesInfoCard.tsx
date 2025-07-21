@@ -46,8 +46,8 @@ export default function EpisodesInfoCard({ title, selectedCharacters } : Episode
             }
             {
                 loading &&
-                <div className="w-full h-[100px] flex items-center justify-center">
-                    <LoaderFour/>
+                <div className="w-full h-[100px] flex items-center justify-center" role="status">
+                    <LoaderFour />
                 </div>
             }
         </CardContent>
