@@ -4,35 +4,36 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import EpisodesInfoCard from '@/components/custom/Episodes/EpisodesInfoCard';
 
-const mockCharacter1: Character = {
-  id: 1,
-  name: 'Rick Sanchez',
-  status: Status.ALIVE,
-  species: 'Human',
-  type: '',
-  gender: 'Male',
-  origin: { name: 'Earth (C-137)', url: 'https://example.com/location/1' },
-  location: { name: 'Earth (Replacement Dimension)', url: 'https://example.com/location/20' },
-  image: 'https://example.com/rick.jpg',
-  episode: ['https://example.com/episode/1'],
-  url: 'https://example.com/character/1',
-  created: '2017-11-04T18:48:46.250Z'
-};
-
-const mockCharacter2: Character = {
-  id: 2,
-  name: 'Morty Smith',
-  status: Status.ALIVE,
-  species: 'Human',
-  type: '',
-  gender: 'Male',
-  origin: { name: 'Earth (Replacement Dimension)', url: 'https://example.com/location/20' },
-  location: { name: 'Earth (Replacement Dimension)', url: 'https://example.com/location/20' },
-  image: 'https://example.com/morty.jpg',
-  episode: ['https://example.com/episode/1', 'https://example.com/episode/2'],
-  url: 'https://example.com/character/2',
-  created: '2017-11-04T18:50:21.651Z'
-};
+const mockCharacters: Character[] = [
+  {
+      id: 1,
+      name: 'Rick Sanchez',
+      status: Status.ALIVE,
+      species: 'Human',
+      type: '',
+      gender: 'Male',
+      origin: { name: 'Earth (C-137)', url: 'https://example.com/location/1' },
+      location: { name: 'Earth (Replacement Dimension)', url: 'https://example.com/location/20' },
+      image: 'https://example.com/rick.jpg',
+      episode: ['https://example.com/episode/1'],
+      url: 'https://example.com/character/1',
+      created: '2017-11-04T18:48:46.250Z'
+    },
+    {
+      id: 2,
+      name: 'Morty Smith',
+      status: Status.ALIVE,
+      species: 'Human',
+      type: '',
+      gender: 'Male',
+      origin: { name: 'Earth (Replacement Dimension)', url: 'https://example.com/location/20' },
+      location: { name: 'Earth (Replacement Dimension)', url: 'https://example.com/location/20' },
+      image: 'https://example.com/morty.jpg',
+      episode: ['https://example.com/episode/1', 'https://example.com/episode/2'],
+      url: 'https://example.com/character/2',
+      created: '2017-11-04T18:50:21.651Z'
+    } 
+]
 
 const mockEpisodes = [
     { id: 1, name: 'Pilot', air_date: 'December 2, 2013' },
@@ -57,7 +58,7 @@ const mockUseFetchEpisodes = (loading = false, episodes = mockEpisodes) => {
   }))
 }
 
-describe('Character Merge Functionality', () => {
+describe('Episodes Component', () => {
   it('show episodes cards in dom', async () => {
     const { rerender } = render(
       <Episodes selectedCharactersPage1={[]} selectedCharactersPage2={[]} />
@@ -66,8 +67,8 @@ describe('Character Merge Functionality', () => {
     act(() => {
       rerender(
         <Episodes 
-          selectedCharactersPage1={[mockCharacter1]} 
-          selectedCharactersPage2={[mockCharacter2]} 
+          selectedCharactersPage1={[mockCharacters[0]]} 
+          selectedCharactersPage2={[mockCharacters[1]]} 
         />
       );
 
@@ -81,7 +82,7 @@ describe('Character Merge Functionality', () => {
   });
 
   it('render episodes corretcly', async () => {
-    render(<EpisodesInfoCard title="Episodes" selectedCharacters={[mockCharacter1, mockCharacter2]} />);
+    render(<EpisodesInfoCard title="Episodes" selectedCharacters={mockCharacters} />);
 
     await waitFor(() => {
       expect(screen.getByText(/Pilot/)).toBeInTheDocument();
@@ -93,7 +94,7 @@ describe('Character Merge Functionality', () => {
     mockUseFetchEpisodes(false, mockEpisodes)
 
     const { default: EpisodesInfoCard } = await import('@/components/custom/Episodes/EpisodesInfoCard')
-    render(<EpisodesInfoCard title="Character #1 - Only Episodes" selectedCharacters={[mockCharacter1, mockCharacter2]} />)
+    render(<EpisodesInfoCard title="Character #1 - Only Episodes" selectedCharacters={mockCharacters} />)
 
     await waitFor(() => {
       expect(screen.getByText(/Pilot/)).toBeInTheDocument()
